@@ -1,0 +1,10 @@
+fastapi
+uvicorn
+scrapy
+google-generativeai
+scrapy-playwright
+playwright
+python-dotenv
+requests
+beautifulsoup4
+lxml

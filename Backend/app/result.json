@@ -1,0 +1,19 @@
+{
+  "variants": [
+    "Phone",
+    "iPhone 15",
+    "Samsung Galaxy S24",
+    "OnePlus 12",
+    "Xiaomi Redmi Note 13 Pro"
+  ],
+  "total_items": 0,
+  "insights": {
+    "overall": {
+      "avg_price": null,
+      "avg_rating": null,
+      "count": 0
+    },
+    "per_variant": []
+  },
+  "items": []
+}
