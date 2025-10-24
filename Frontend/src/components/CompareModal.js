@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { X, Users, PackageCheck, TrendingUp, TrendingDown } from 'lucide-react';
 import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
 import { convertUSDToINR } from '../utils/currency';
@@ -38,6 +38,7 @@ function clamp(v, a, b) { return Math.max(a, Math.min(b, v)); }
 export default function CompareModal({ open, onClose, product }) {
   const [market1, setMarket1] = useState(null);
   const [market2, setMarket2] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   // Decide marketplaces based on product category
   const marketplaces = useMemo(() => {
@@ -47,12 +48,23 @@ export default function CompareModal({ open, onClose, product }) {
   }, [product]);
 
   // Initialize selection when product or marketplaces change
-  React.useEffect(() => {
+  useEffect(() => {
     if (marketplaces.length > 0) {
       setMarket1(marketplaces[0].value);
       setMarket2(marketplaces[1]?.value || marketplaces[0].value);
     }
   }, [marketplaces]);
+
+  // Show loading for 6s when modal opens
+  useEffect(() => {
+    if (open) {
+      setIsLoading(true);
+      const t = setTimeout(() => setIsLoading(false), 6000);
+      return () => clearTimeout(t);
+    } else {
+      setIsLoading(false);
+    }
+  }, [open]);
 
   // Helper to build deterministic stats for a marketplace
   const buildStats = (market, basePrice) => {
@@ -82,6 +94,18 @@ export default function CompareModal({ open, onClose, product }) {
   };
 
   if (!open) return null;
+
+  if (isLoading) {
+    return (
+      <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm">
+        <div className="relative w-full max-w-md mx-2 md:mx-4 bg-dark-card rounded-2xl shadow-2xl border border-cyan-400/20 p-8 flex flex-col items-center animate-fade-in">
+          <svg className="animate-spin mb-4" width="48" height="48" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#00FFF5" strokeWidth="4" strokeDasharray="60 40" /></svg>
+          <div className="text-neon-cyan text-xl font-bold mb-2">Gathering price intelligence...</div>
+          <div className="text-gray-400">Comparing {product?.name || product?.title || 'product'} across top marketplaces. Please wait…</div>
+        </div>
+      </div>
+    );
+  }
 
   const basePriceUSD = product?.averagePrice || product?.price || 1000;
 

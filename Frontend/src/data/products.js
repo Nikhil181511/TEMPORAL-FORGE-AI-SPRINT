@@ -42,7 +42,7 @@ const products = [
   },
   {
     id: "2",
-    title: "iPhone 15 Pro Max",
+    title: "iPhone 16 Pro",
     brand: "Apple",
     launchYear: 2025,
     averagePrice: 139999,

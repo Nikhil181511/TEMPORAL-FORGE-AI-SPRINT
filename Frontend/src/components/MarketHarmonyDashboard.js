@@ -78,7 +78,7 @@ export default function MarketHarmonyDashboard() {
           />
           <div>
             <h1 className="text-3xl font-bold text-white">
-              Market Harmony – {data.name}
+              MarketPulse.AI – {data.name}
             </h1>
             <div className="flex gap-4 text-gray-400 mt-2">
               <span>Category: {data.category}</span>
