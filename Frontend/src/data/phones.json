@@ -1,0 +1,130 @@
+[
+  {
+    "id": "1",
+    "name": "Samsung S25 Ultra",
+    "brand": "Samsung",
+    "launchYear": 2025,
+    "averagePrice": 119999,
+    "priceChange": -2.5,
+    "activeSellers": 68,
+    "sellerChange": 12,
+    "harmonyScore": 74,
+    "harmonyChange": -3.2,
+    "category": "Phones",
+    "variant": "512GB",
+    "alerts": [
+      {
+        "type": "Price Spike",
+        "title": "High Price Surge – Samsung S25 Ultra",
+        "subtitle": "512GB Phantom Black",
+        "description": "Price increased 35% in the last 48 hours; only 5 sellers remain."
+      },
+      {
+        "type": "High Greed",
+        "title": "Market Manipulation Warning",
+        "subtitle": "256GB Models",
+        "description": "2 sellers controlling 70% of base model inventory with inflated pricing."
+      },
+      {
+        "type": "Low Supply",
+        "title": "Limited Availability",
+        "subtitle": "1TB Titanium Gray",
+        "description": "Supply decreased by 60% in last 48h. Premium variants running low."
+      },
+      {
+        "type": "Price Spike",
+        "title": "Regional Price Disparity",
+        "subtitle": "All Variants",
+        "description": "Price difference up to 15% across major cities for identical models."
+      }
+    ],
+    "charts": {
+      "harmonyTrend": [78, 75, 70, 73, 66, 62, 58],
+      "regionalPrices": {
+        "Mumbai": 121999,
+        "Delhi": 123499,
+        "Bangalore": 119499,
+        "Hyderabad": 125999,
+        "Chennai": 120499
+      }
+    },
+    "aiInsights": [
+      {
+        "type": "Imbalance",
+        "message": "Detected monopolistic behavior by 2 sellers controlling most inventory."
+      },
+      {
+        "type": "Market Movement",
+        "message": "Seller competition up 10% this week, slight stabilization visible."
+      },
+      {
+        "type": "Recommendation",
+        "message": "Monitor Amazon and Flipkart listings; potential shortage in 48 hours."
+      }
+    ]
+  },
+  {
+    "id": "2",
+    "name": "iPhone 16 Pro",
+    "brand": "Apple",
+    "launchYear": 2025,
+    "averagePrice": 139999,
+    "priceChange": 3.1,
+    "activeSellers": 52,
+    "sellerChange": -5,
+    "harmonyScore": 69,
+    "harmonyChange": -2.1,
+    "category": "Phones",
+    "variant": "256GB",
+    "alerts": [
+      {
+        "type": "Price Spike",
+        "title": "Premium Model Surge",
+        "subtitle": "Deep Purple 256GB",
+        "description": "Demand-driven 25% price rise in last 24 hours."
+      },
+      {
+        "type": "High Greed",
+        "title": "Authorized Seller Control",
+        "subtitle": "Official Channels",
+        "description": "Only 3 certified resellers holding 80% of total inventory."
+      },
+      {
+        "type": "Low Supply",
+        "title": "Stock Shortage",
+        "subtitle": "Pro Series",
+        "description": "Shipments delayed by 4 weeks; fewer than 10 active sellers nationwide."
+      },
+      {
+        "type": "Price Spike",
+        "title": "Regional Imbalance",
+        "subtitle": "Bangalore vs Delhi",
+        "description": "Up to ₹10,000 difference across major cities."
+      }
+    ],
+    "charts": {
+      "harmonyTrend": [81, 78, 77, 75, 70, 68, 69],
+      "regionalPrices": {
+        "Mumbai": 139499,
+        "Delhi": 140999,
+        "Bangalore": 138499,
+        "Hyderabad": 142999,
+        "Chennai": 140499
+      }
+    },
+    "aiInsights": [
+      {
+        "type": "Imbalance",
+        "message": "Detected price clustering among major sellers."
+      },
+      {
+        "type": "Market Movement",
+        "message": "Promotional offers have temporarily reduced competition in some channels."
+      },
+      {
+        "type": "Recommendation",
+        "message": "High retail markup expected; consider waiting 3 days for price correction."
+      }
+    ]
+  }
+]

@@ -14,6 +14,14 @@ function App() {
         <Route path="/details/:id" element={<DetailPage />} />
       </Routes>
     </Router>
+import './App.css';
+import MarketHarmonyDashboard from './components/MarketHarmonyDashboard';
+
+function App() {
+  return (
+    <div className="App">
+      <MarketHarmonyDashboard />
+    </div>
   );
 }
 

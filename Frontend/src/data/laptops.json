@@ -1,0 +1,120 @@
+[
+  {
+    "id": "1",
+    "name": "MacBook Pro M3",
+    "brand": "Apple",
+    "launchYear": 2024,
+    "averagePrice": 219999,
+    "priceChange": -1.8,
+    "activeSellers": 42,
+    "sellerChange": 8,
+    "harmonyScore": 80,
+    "harmonyChange": 1.2,
+    "category": "Laptops",
+    "variant": "16-inch, 1TB",
+    "alerts": [
+      {
+        "type": "Price Spike",
+        "title": "High-End Model Price Surge",
+        "subtitle": "Space Black Edition",
+        "description": "Price jumped 20% in two days due to limited launch units."
+      },
+      {
+        "type": "High Greed",
+        "title": "Retailer Overpricing",
+        "subtitle": "Apple Resellers",
+        "description": "3 online stores listing over ₹2.4L despite MSRP of ₹2.2L."
+      },
+      {
+        "type": "Low Supply",
+        "title": "Chipset Constraint",
+        "subtitle": "M3 Pro Variants",
+        "description": "Production delay causing 40% shortage in inventory."
+      },
+      {
+        "type": "Price Spike",
+        "title": "Regional Disparity",
+        "subtitle": "Metro Cities",
+        "description": "Hyderabad retail ₹15,000 higher than Mumbai average."
+      }
+    ],
+    "charts": {
+      "harmonyTrend": [82, 81, 79, 80, 81, 80, 80],
+      "regionalPrices": {
+        "Mumbai": 222999,
+        "Delhi": 224999,
+        "Bangalore": 219499,
+        "Hyderabad": 223499
+      }
+    },
+    "aiInsights": [
+      {
+        "type": "Market Movement",
+        "message": "Seller competition up 15%, stabilizing overall prices."
+      },
+      {
+        "type": "Recommendation",
+        "message": "Wait for next shipment to see price normalization; current premiums likely short-term."
+      }
+    ]
+  },
+  {
+    "id": "2",
+    "name": "Dell XPS 16",
+    "brand": "Dell",
+    "launchYear": 2024,
+    "averagePrice": 179999,
+    "priceChange": 2.5,
+    "activeSellers": 34,
+    "sellerChange": -4,
+    "harmonyScore": 72,
+    "harmonyChange": -1.8,
+    "category": "Laptops",
+    "variant": "512GB, RTX 4070",
+    "alerts": [
+      {
+        "type": "Price Spike",
+        "title": "Price Inflation Warning",
+        "subtitle": "RTX Variants",
+        "description": "Sellers increased prices by 12% after limited restock."
+      },
+      {
+        "type": "High Greed",
+        "title": "Inventory Control",
+        "subtitle": "Gaming Segment",
+        "description": "2 vendors own 60% of RTX configurations."
+      },
+      {
+        "type": "Low Supply",
+        "title": "Component Shortage",
+        "subtitle": "16GB RAM Variants",
+        "description": "Memory supplier issues causing production slowdowns."
+      },
+      {
+        "type": "Price Spike",
+        "title": "Regional Price Gap",
+        "subtitle": "Tier-1 vs Tier-2 Cities",
+        "description": "₹8,000–₹12,000 variance observed."
+      }
+    ],
+    "charts": {
+      "harmonyTrend": [75, 74, 73, 72, 70, 72, 72],
+      "regionalPrices": {
+        "Mumbai": 181499,
+        "Delhi": 182999,
+        "Bangalore": 178499,
+        "Hyderabad": 180999
+      }
+    },
+    "aiInsights": [
+      {
+        "type": "Recommendation",
+        "message": "Expected restock next week; avoid current inflated prices."
+      },
+      {
+        "type": "Market Movement",
+        "message": "Short-term demand spike from gaming stores driving temporary premiums."
+      }
+    ]
+  }
+]
