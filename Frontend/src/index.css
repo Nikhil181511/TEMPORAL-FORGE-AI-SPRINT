@@ -1,13 +1,83 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+    Ubuntu, Cantarell, 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: theme('colors.dark-surface');
+  color: theme('colors.text-primary');
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+@layer components {
+  .card {
+    @apply bg-dark-card rounded-2xl shadow-card hover:shadow-card-hover transition-all duration-300 border border-gray-800/20;
+  }
+
+  .stats-card {
+    @apply card bg-gradient-to-b from-dark-card to-dark-card/90 p-6;
+  }
+
+  .alert-card {
+    @apply card p-6 hover:scale-[1.02] transition-transform duration-300;
+  }
+
+  .badge {
+    @apply px-3 py-1 rounded-full text-sm font-medium;
+  }
+
+  .badge-red {
+    @apply bg-red-alert/20 text-red-alert;
+  }
+
+  .badge-yellow {
+    @apply bg-yellow-warning/20 text-yellow-warning;
+  }
+
+  .badge-orange {
+    @apply bg-orange-alert/20 text-orange-alert;
+  }
+
+  .badge-purple {
+    @apply bg-purple-info/20 text-purple-info;
+  }
+
+  .chart-container {
+    @apply card p-6 bg-gradient-to-b from-dark-card to-dark-card/90;
+  }
+
+  .compare-button {
+    @apply px-6 py-3 bg-neon-cyan text-dark-surface rounded-xl font-semibold 
+           hover:shadow-neon transition-all duration-300 hover:scale-105;
+  }
+
+  .insight-card {
+    @apply card p-6 hover:scale-[1.02] transition-transform duration-300
+           bg-gradient-to-b from-dark-card to-dark-card/90;
+  }
+
+  .trend-up {
+    @apply text-green-success;
+  }
+
+  .trend-down {
+    @apply text-red-alert;
+  }
+
+  .chart-tooltip {
+    @apply bg-dark-card border border-gray-800 rounded-lg p-2 shadow-lg;
+  }
+
+  .live-indicator {
+    @apply inline-flex items-center text-xs;
+  }
+
+  .live-indicator::before {
+    content: '';
+    @apply w-2 h-2 bg-green-success rounded-full mr-1 animate-pulse;
+  }
 }
