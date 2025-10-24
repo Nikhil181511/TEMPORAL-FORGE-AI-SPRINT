@@ -4,6 +4,8 @@ import Header from "../components/Header";
 import StatCard from "../components/StatCard";
 import ProductCard from "../components/ProductCard";
 import products from "../data/products";
+import { motion } from 'framer-motion';
+import { convertUSDToINR } from '../utils/currency';
 
 export default function HomePage() {
   const location = useLocation();
@@ -21,14 +23,14 @@ export default function HomePage() {
   return (
     <div className="mp-app">
       <Header />
-      <main className="mp-main">
+      <motion.main className="mp-main" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.7 }}>
         <section className="overview">
           <h2>Market Overview</h2>
           <p className="sub">
             Real-time {filterCategory} market insights and pricing harmony metrics
           </p>
           <div className="stats-grid">
-            <StatCard title="Average Price" value="$947" change="+8.3%" hint="Price trend" />
+            <StatCard title="Average Price" value={convertUSDToINR(947)} change="+8.3%" hint="Price trend" />
             <StatCard title="Number of Sellers" value="2,347" change="-12.4%" hint="Seller count trend" />
             <StatCard title="Harmony Score" value="64" hint="Moderate Balance" accent="highlight" />
           </div>
@@ -45,7 +47,7 @@ export default function HomePage() {
             ))}
           </div>
         </section>
-      </main>
+      </motion.main>
     </div>
   );
 }

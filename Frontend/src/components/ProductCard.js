@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { convertUSDToINR } from '../utils/currency';
 
 export default function ProductCard({ item }) {
   return (
@@ -13,7 +14,7 @@ export default function ProductCard({ item }) {
         <div className="product-tag">{item.tag}</div>
         <div className="product-title">{item.title}</div>
         <div className="product-bottom">
-          <div className="product-price">${item.price}</div>
+          <div className="product-price">{convertUSDToINR(item.price)}</div>
           <div className="product-score">Harmony {item.score}</div>
         </div>
         <div className="product-alert">{item.alertMessage}</div>

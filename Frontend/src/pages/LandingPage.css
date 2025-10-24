@@ -109,3 +109,34 @@
   .landing-main h1 { font-size: 36px; }
   .landing-form { min-width: 90vw; padding: 24px 8vw; }
 }
+
+/* Loading / progress UI */
+.loading-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  margin-top: 24px;
+}
+.loading-message {
+  color: #e6fefb;
+  font-weight: 700;
+  font-size: 18px;
+}
+.progress-bar {
+  width: 420px;
+  height: 12px;
+  background: rgba(255,255,255,0.06);
+  border-radius: 8px;
+  overflow: hidden;
+}
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg,#00fff5,#00b3ff);
+  width: 0%;
+  transition: width 0.15s linear;
+}
+.countdown {
+  color: #a7b6b8;
+}
+

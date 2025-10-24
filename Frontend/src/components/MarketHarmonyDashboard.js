@@ -1,18 +1,19 @@
 import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import products from '../data/products';
 import phones from '../data/phones.json';
+import laptops from '../data/laptops.json';
+import houses from '../data/houses.json';
 import { motion } from 'framer-motion';
 import { LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import { AlertTriangle, Users, Activity, AlertCircle, TrendingDown, TrendingUp, Brain } from 'lucide-react';
 import CompareModal from './CompareModal';
 
-const ICONS = {
-  brain: <Brain className="text-neon-cyan" />,
-  trendup: <TrendingUp className="text-green-500" />,
-  ai: <AlertCircle className="text-yellow-500" />,
-};
 
 export default function MarketHarmonyDashboard() {
+  const { id } = useParams();
   const [data, setData] = useState(null);
+  const [summary, setSummary] = useState(null); // product summary from products.js (has image)
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [showModal, setShowModal] = useState(false);
@@ -20,19 +21,40 @@ export default function MarketHarmonyDashboard() {
   useEffect(() => {
     setLoading(true);
     setError(null);
+
     try {
-      // Find phone with id=1
-      const phone = phones.find((p) => p.id === '1' || p.id === 1);
-      if (phone) {
-        setData(phone);
-      } else {
-        setError('Error loading data for this product.');
+      // find product summary to know category and image
+      const prodSummary = products.find((p) => String(p.id) === String(id));
+      setSummary(prodSummary || null);
+
+      if (!prodSummary) {
+        setError('Product not found in catalog.');
+        setLoading(false);
+        return;
       }
+
+      const category = prodSummary.category;
+      let sourceArray = [];
+      if (category === 'Phones') sourceArray = phones;
+      else if (category === 'Laptops') sourceArray = laptops;
+      else if (category === 'Housing') sourceArray = houses;
+      else sourceArray = [];
+
+      const detail = sourceArray.find((p) => String(p.id) === String(id));
+      if (!detail) {
+        setError('Detailed data not available for this product.');
+        setLoading(false);
+        return;
+      }
+
+      setData(detail);
     } catch (e) {
+      console.error(e);
       setError('Error loading data for this product.');
     }
+
     setLoading(false);
-  }, []);
+  }, [id]);
 
   if (loading) return <div className="flex items-center justify-center min-h-screen text-neon-cyan text-xl font-bold">Loading market data...</div>;
   if (error) return <div className="flex items-center justify-center min-h-screen text-red-500 text-xl font-bold">{error}</div>;
@@ -42,13 +64,15 @@ export default function MarketHarmonyDashboard() {
   const harmonyTrend = (data.charts?.harmonyTrend || []).map((score, i) => ({ day: `Day ${i+1}`, score }));
   const regionalPrices = data.charts?.regionalPrices ? Object.entries(data.charts.regionalPrices).map(([city, price]) => ({ city, price })) : [];
 
+  const imgSrc = summary?.image || '/images/s25.jpg';
+
   return (
     <div className="min-h-screen bg-dark-surface p-6">
       {/* Header Section */}
       <header className="flex items-center justify-between mb-8">
         <div className="flex items-center gap-6">
           <img
-            src={"/images/s25.jpg"}
+            src={imgSrc}
             alt={data.name}
             className="w-24 h-24 object-cover rounded-lg shadow-lg"
           />
@@ -81,13 +105,14 @@ export default function MarketHarmonyDashboard() {
             {data.priceChange < 0 ? <TrendingDown className="text-red-500" /> : <TrendingUp className="text-green-500" />}
           </div>
           <div className="mt-2">
-            <span className="text-3xl font-bold">₹{data.averagePrice.toLocaleString()}</span>
+            <span className="text-3xl font-bold">{data.averagePrice.toLocaleString ? data.averagePrice.toLocaleString() : data.averagePrice}</span>
             <span className={data.priceChange < 0 ? 'text-red-500 ml-2' : 'text-green-500 ml-2'}>
               {data.priceChange < 0 ? `↓${Math.abs(data.priceChange)}%` : `↑${data.priceChange}%`}
             </span>
           </div>
           <p className="text-sm text-gray-500 mt-1">{data.variant} variant</p>
         </motion.div>
+
         <motion.div whileHover={{ scale: 1.02 }} className="card p-6">
           <div className="flex justify-between items-start">
             <h3 className="text-lg text-gray-400">Active Sellers</h3>
@@ -99,6 +124,7 @@ export default function MarketHarmonyDashboard() {
           </div>
           <p className="text-sm text-gray-500 mt-1">Last 24 hours</p>
         </motion.div>
+
         <motion.div whileHover={{ scale: 1.02 }} className="card p-6">
           <div className="flex justify-between items-start">
             <h3 className="text-lg text-gray-400">Harmony Score</h3>
