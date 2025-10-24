@@ -16,7 +16,6 @@ function App() {
         <Route path="/" element={<LandingPage />} />
         <Route path="/overview" element={<HomePage />} />
         <Route path="/details/:id" element={<MarketHarmonyDashboard />} />
-        <Route path="/dale" element={<MarketHarmonyDashboard />} />
       </Routes>
     </Router>
   );

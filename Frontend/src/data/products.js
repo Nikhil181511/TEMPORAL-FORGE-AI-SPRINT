@@ -38,7 +38,7 @@ const products = [
       }
     ],
     image:
-      "https://images.unsplash.com/photo-1706710196849-c7a304a15a10?auto=format&fit=crop&w=800&q=60"
+      "https://images.unsplash.com/photo-1738830234395-a351829a1c7b?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8U2Ftc3VuZyUyMFMyNSUyMFVsdHJhfGVufDB8fDB8fHww&auto=format&fit=crop&q=60&w=600"
   },
   {
     id: "2",
@@ -78,7 +78,7 @@ const products = [
       }
     ],
     image:
-      "https://images.unsplash.com/photo-1694362411622-47604a5284a5?auto=format&fit=crop&w=800&q=60"
+      "https://images.unsplash.com/photo-1695822822491-d92cee704368?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8aVBob25lJTIwMTUlMjBQcm8lMjBNYXh8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&q=60&w=600"
   },
   {
     id: "3",
@@ -118,7 +118,7 @@ const products = [
       }
     ],
     image:
-      "https://images.unsplash.com/photo-1676921194224-3edb3e7a745f?auto=format&fit=crop&w=800&q=60"
+      "https://images.unsplash.com/photo-1724322637761-1fef6ca8c8b3?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8R29vZ2xlJTIwUGl4ZWwlMjA5JTIwUHJvfGVufDB8fDB8fHww&auto=format&fit=crop&q=60&w=600"
   },
   {
     id: "4",
@@ -158,7 +158,7 @@ const products = [
       }
     ],
     image:
-      "https://images.unsplash.com/photo-1606813907291-6610a95a96ef?auto=format&fit=crop&w=800&q=60"
+      "https://images.unsplash.com/photo-1658851362428-e136c3efad4b?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8T25lUGx1cyUyMDEzJTIwUHJvJTIwcGhvbmV8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&q=60&w=600"
   },
 
   // 💻 Laptops
@@ -239,7 +239,7 @@ const products = [
       }
     ],
     image:
-      "https://images.unsplash.com/photo-1587202372775-a1d1e1d01f80?auto=format&fit=crop&w=800&q=60"
+      "https://images.unsplash.com/photo-1713470812508-c276021f1b93?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8RGVsbCUyMFhQUyUyMDE2JTIwbGFwdG9wfGVufDB8fDB8fHww&auto=format&fit=crop&q=60&w=600"
   },
   {
     id: "7",
@@ -319,7 +319,7 @@ const products = [
       }
     ],
     image:
-      "https://images.unsplash.com/photo-1610484826967-09c5720778e1?auto=format&fit=crop&w=800&q=60"
+      "https://plus.unsplash.com/premium_photo-1754404025529-8961df8c7380?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8QXN1cyUyMFJPRyUyMFplcGh5cnVzJTIwRzE2JTIwbGFwdG9wfGVufDB8fDB8fHww&auto=format&fit=crop&q=60&w=600"
   },
 
   // 🏠 Housing
@@ -437,7 +437,7 @@ const products = [
       }
     ],
     image:
-      "https://images.unsplash.com/photo-1600585154208-5d1d9b8f9f7d?auto=format&fit=crop&w=800&q=60"
+      "https://www.guptasen.com/wp-content/uploads/2021/02/duplex-penthouse-furnished-bandra-west.jpg"
   },
   {
     id: "12",
