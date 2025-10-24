@@ -95,7 +95,7 @@ export default function MarketHarmonyDashboard() {
           Compare Prices
         </motion.button>
       </header>
-      <CompareModal open={showModal} onClose={() => setShowModal(false)} />
+  <CompareModal open={showModal} onClose={() => setShowModal(false)} product={data} />
 
       {/* Summary Cards */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
