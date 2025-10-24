@@ -1,0 +1,118 @@
+[
+  {
+    "id": "1",
+    "name": "Luxury Beachfront Villa, North Goa",
+    "brand": "Goa Realty Group",
+    "launchYear": 2019,
+    "averagePrice": 32000000,
+    "priceChange": 4.5,
+    "activeSellers": 5,
+    "sellerChange": 1,
+    "harmonyScore": 61,
+    "harmonyChange": -3.5,
+    "category": "Housing",
+    "variant": "4BHK Beach Villa",
+    "alerts": [
+      {
+        "type": "Price Spike",
+        "title": "Coastal Property Surge",
+        "subtitle": "Vagator & Anjuna Areas",
+        "description": "Beachfront rates up 12% this quarter."
+      },
+      {
+        "type": "High Greed",
+        "title": "Developer Price Control",
+        "subtitle": "Private Listings",
+        "description": "2 developers controlling 60% of the luxury villa listings."
+      },
+      {
+        "type": "Low Supply",
+        "title": "Limited Inventory",
+        "subtitle": "Beachfront Villas",
+        "description": "Only 7 unsold villas remain in North Goa region."
+      },
+      {
+        "type": "Price Spike",
+        "title": "Regional Disparity",
+        "subtitle": "North vs South Goa",
+        "description": "North Goa properties 25% pricier than South for similar specs."
+      }
+    ],
+    "charts": {
+      "harmonyTrend": [68, 66, 63, 62, 61, 60, 61],
+      "regionalPrices": {
+        "Anjuna": 31000000,
+        "Vagator": 32500000,
+        "Calangute": 31800000
+      }
+    },
+    "aiInsights": [
+      {
+        "type": "Recommendation",
+        "message": "High-end buyers dominating the market; consider investing before Q4 price rise."
+      },
+      {
+        "type": "Imbalance",
+        "message": "Significant developer concentration—monitor resale listings for markup patterns."
+      }
+    ]
+  },
+  {
+    "id": "2",
+    "name": "Sea View Apartment, South Goa",
+    "brand": "BlueWave Developers",
+    "launchYear": 2021,
+    "averagePrice": 14500000,
+    "priceChange": 1.8,
+    "activeSellers": 9,
+    "sellerChange": 2,
+    "harmonyScore": 67,
+    "harmonyChange": 2.1,
+    "category": "Housing",
+    "variant": "3BHK Sea View Apartment",
+    "alerts": [
+      {
+        "type": "Price Spike",
+        "title": "Demand-Driven Increase",
+        "subtitle": "Colva & Cavelossim",
+        "description": "Property values up 9% in the past month."
+      },
+      {
+        "type": "High Greed",
+        "title": "Agent Overpricing Alert",
+        "subtitle": "Local Agents",
+        "description": "Unregistered agents listing inflated prices on resale units."
+      },
+      {
+        "type": "Low Supply",
+        "title": "High Booking Rates",
+        "subtitle": "Luxury Apartments",
+        "description": "Over 85% occupancy expected by next quarter."
+      },
+      {
+        "type": "Price Spike",
+        "title": "Regional Price Gap",
+        "subtitle": "South Goa Market",
+        "description": "Margao listings ₹10–15L higher than coastal averages."
+      }
+    ],
+    "charts": {
+      "harmonyTrend": [65, 65, 66, 67, 68, 67, 67],
+      "regionalPrices": {
+        "Colva": 14200000,
+        "Benaulim": 14500000,
+        "Cavelossim": 14750000
+      }
+    },
+    "aiInsights": [
+      {
+        "type": "Market Movement",
+        "message": "Steady demand from NRI buyers; moderate appreciation likely."
+      },
+      {
+        "type": "Recommendation",
+        "message": "Consider short-term rental yield analysis before buying as occupancy rates improve."
+      }
+    ]
+  }
+]

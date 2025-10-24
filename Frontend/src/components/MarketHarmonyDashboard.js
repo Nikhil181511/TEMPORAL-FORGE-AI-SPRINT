@@ -1,29 +1,46 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import phones from '../data/phones.json';
 import { motion } from 'framer-motion';
 import { LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import { AlertTriangle, Users, Activity, AlertCircle, TrendingDown, TrendingUp, Brain } from 'lucide-react';
 import CompareModal from './CompareModal';
 
-const harmonyScoreData = [
-  { day: 'Mon', score: 78 },
-  { day: 'Tue', score: 75 },
-  { day: 'Wed', score: 72 },
-  { day: 'Thu', score: 70 },
-  { day: 'Fri', score: 65 },
-  { day: 'Sat', score: 62 },
-  { day: 'Sun', score: 58 },
-];
+const ICONS = {
+  brain: <Brain className="text-neon-cyan" />,
+  trendup: <TrendingUp className="text-green-500" />,
+  ai: <AlertCircle className="text-yellow-500" />,
+};
 
-const regionalPriceData = [
-  { city: 'Mumbai', price: 1299 },
-  { city: 'Delhi', price: 1350 },
-  { city: 'Bangalore', price: 1275 },
-  { city: 'Hyderabad', price: 1399 },
-  { city: 'Chennai', price: 1325 },
-];
-
-const MarketHarmonyDashboard = () => {
+export default function MarketHarmonyDashboard() {
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const [showModal, setShowModal] = useState(false);
+
+  useEffect(() => {
+    setLoading(true);
+    setError(null);
+    try {
+      // Find phone with id=1
+      const phone = phones.find((p) => p.id === '1' || p.id === 1);
+      if (phone) {
+        setData(phone);
+      } else {
+        setError('Error loading data for this product.');
+      }
+    } catch (e) {
+      setError('Error loading data for this product.');
+    }
+    setLoading(false);
+  }, []);
+
+  if (loading) return <div className="flex items-center justify-center min-h-screen text-neon-cyan text-xl font-bold">Loading market data...</div>;
+  if (error) return <div className="flex items-center justify-center min-h-screen text-red-500 text-xl font-bold">{error}</div>;
+  if (!data) return null;
+
+  // Convert charts for recharts
+  const harmonyTrend = (data.charts?.harmonyTrend || []).map((score, i) => ({ day: `Day ${i+1}`, score }));
+  const regionalPrices = data.charts?.regionalPrices ? Object.entries(data.charts.regionalPrices).map(([city, price]) => ({ city, price })) : [];
 
   return (
     <div className="min-h-screen bg-dark-surface p-6">
@@ -31,18 +48,18 @@ const MarketHarmonyDashboard = () => {
       <header className="flex items-center justify-between mb-8">
         <div className="flex items-center gap-6">
           <img
-            src="/images/s25.jpg"
-            alt="Samsung S25 Ultra"
+            src={"/images/s25.jpg"}
+            alt={data.name}
             className="w-24 h-24 object-cover rounded-lg shadow-lg"
           />
           <div>
             <h1 className="text-3xl font-bold text-white">
-              Market Harmony – Samsung S25 Ultra
+              Market Harmony – {data.name}
             </h1>
             <div className="flex gap-4 text-gray-400 mt-2">
-              <span>Category: Smartphones</span>
-              <span>Brand: Samsung</span>
-              <span>Launch Year: 2025</span>
+              <span>Category: {data.category}</span>
+              <span>Brand: {data.brand}</span>
+              <span>Launch Year: {data.launchYear}</span>
             </div>
           </div>
         </div>
@@ -58,47 +75,40 @@ const MarketHarmonyDashboard = () => {
 
       {/* Summary Cards */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-        <motion.div
-          whileHover={{ scale: 1.02 }}
-          className="card p-6"
-        >
+        <motion.div whileHover={{ scale: 1.02 }} className="card p-6">
           <div className="flex justify-between items-start">
             <h3 className="text-lg text-gray-400">Average Price</h3>
-            <TrendingDown className="text-red-500" />
+            {data.priceChange < 0 ? <TrendingDown className="text-red-500" /> : <TrendingUp className="text-green-500" />}
           </div>
           <div className="mt-2">
-            <span className="text-3xl font-bold">$1,299</span>
-            <span className="text-red-500 ml-2">↓2.5%</span>
+            <span className="text-3xl font-bold">₹{data.averagePrice.toLocaleString()}</span>
+            <span className={data.priceChange < 0 ? 'text-red-500 ml-2' : 'text-green-500 ml-2'}>
+              {data.priceChange < 0 ? `↓${Math.abs(data.priceChange)}%` : `↑${data.priceChange}%`}
+            </span>
           </div>
-          <p className="text-sm text-gray-500 mt-1">512GB variant</p>
+          <p className="text-sm text-gray-500 mt-1">{data.variant} variant</p>
         </motion.div>
-
-        <motion.div
-          whileHover={{ scale: 1.02 }}
-          className="card p-6"
-        >
+        <motion.div whileHover={{ scale: 1.02 }} className="card p-6">
           <div className="flex justify-between items-start">
             <h3 className="text-lg text-gray-400">Active Sellers</h3>
             <Users className="text-green-500" />
           </div>
           <div className="mt-2">
-            <span className="text-3xl font-bold">68</span>
-            <span className="text-green-500 ml-2">↑12%</span>
+            <span className="text-3xl font-bold">{data.activeSellers}</span>
+            <span className="text-green-500 ml-2">↑{data.sellerChange}%</span>
           </div>
           <p className="text-sm text-gray-500 mt-1">Last 24 hours</p>
         </motion.div>
-
-        <motion.div
-          whileHover={{ scale: 1.02 }}
-          className="card p-6"
-        >
+        <motion.div whileHover={{ scale: 1.02 }} className="card p-6">
           <div className="flex justify-between items-start">
             <h3 className="text-lg text-gray-400">Harmony Score</h3>
-            <Activity className="text-red-500" />
+            <Activity className={data.harmonyChange < 0 ? 'text-red-500' : 'text-green-500'} />
           </div>
           <div className="mt-2">
-            <span className="text-3xl font-bold">74</span>
-            <span className="text-red-500 ml-2">↓3.2%</span>
+            <span className="text-3xl font-bold">{data.harmonyScore}</span>
+            <span className={data.harmonyChange < 0 ? 'text-red-500 ml-2' : 'text-green-500 ml-2'}>
+              {data.harmonyChange < 0 ? `↓${Math.abs(data.harmonyChange)}%` : `↑${data.harmonyChange}%`}
+            </span>
           </div>
           <p className="text-sm text-gray-500 mt-1">Market health index</p>
         </motion.div>
@@ -108,121 +118,53 @@ const MarketHarmonyDashboard = () => {
       <section className="mb-8">
         <h2 className="text-2xl font-bold mb-4 text-white">Greed & Scarcity Alerts</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <motion.div
-            whileHover={{ scale: 1.02 }}
-            className="card p-6"
-          >
-            <div className="flex items-start gap-4">
-              <AlertTriangle className="text-red-500" />
-              <div>
-                <h3 className="font-semibold text-white">High Price Surge – Samsung S25 Ultra</h3>
-                <p className="text-gray-400 mt-1">
-                  Price increased 35% in the last 48 hours; only 5 sellers remain.
-                </p>
-                <span className="inline-block mt-2 px-3 py-1 bg-red-500/20 text-red-500 rounded-full text-sm">
-                  Price Spike
-                </span>
+          {(data.alerts || []).map((alert, i) => (
+            <motion.div key={i} whileHover={{ scale: 1.02 }} className="card p-6">
+              <div className="flex items-start gap-4">
+                {alert.type === 'Price Spike' && <AlertTriangle className="text-red-500" />}
+                {alert.type === 'High Greed' && <AlertCircle className="text-orange-500" />}
+                {alert.type === 'Scarcity' && <AlertTriangle className="text-yellow-500" />}
+                {alert.type === 'Region' && <AlertCircle className="text-purple-500" />}
+                <div>
+                  <h3 className="font-semibold text-white">{alert.title}</h3>
+                  <p className="text-gray-400 mt-1">{alert.description}</p>
+                  <span className={`inline-block mt-2 px-3 py-1 rounded-full text-sm ${
+                    alert.type === 'Price Spike' ? 'bg-red-500/20 text-red-500' :
+                    alert.type === 'High Greed' ? 'bg-orange-500/20 text-orange-500' :
+                    alert.type === 'Scarcity' ? 'bg-yellow-500/20 text-yellow-500' :
+                    'bg-purple-500/20 text-purple-500'
+                  }`}>
+                    {alert.type}
+                  </span>
+                </div>
               </div>
-            </div>
-          </motion.div>
-
-          <motion.div
-            whileHover={{ scale: 1.02 }}
-            className="card p-6"
-          >
-            <div className="flex items-start gap-4">
-              <AlertCircle className="text-orange-500" />
-              <div>
-                <h3 className="font-semibold text-white">Market Manipulation Warning</h3>
-                <p className="text-gray-400 mt-1">
-                  2 sellers controlling 70% of 256GB models.
-                </p>
-                <span className="inline-block mt-2 px-3 py-1 bg-orange-500/20 text-orange-500 rounded-full text-sm">
-                  High Greed
-                </span>
-              </div>
-            </div>
-          </motion.div>
-
-          <motion.div
-            whileHover={{ scale: 1.02 }}
-            className="card p-6"
-          >
-            <div className="flex items-start gap-4">
-              <AlertTriangle className="text-yellow-500" />
-              <div>
-                <h3 className="font-semibold text-white">Limited Availability</h3>
-                <p className="text-gray-400 mt-1">
-                  Supply decreased by 60% in last 48h. Premium variants running low.
-                </p>
-                <span className="inline-block mt-2 px-3 py-1 bg-yellow-500/20 text-yellow-500 rounded-full text-sm">
-                  Low Supply
-                </span>
-              </div>
-            </div>
-          </motion.div>
-
-          <motion.div
-            whileHover={{ scale: 1.02 }}
-            className="card p-6"
-          >
-            <div className="flex items-start gap-4">
-              <AlertCircle className="text-purple-500" />
-              <div>
-                <h3 className="font-semibold text-white">Regional Price Disparity</h3>
-                <p className="text-gray-400 mt-1">
-                  Price difference up to 15% across major cities for identical models.
-                </p>
-                <span className="inline-block mt-2 px-3 py-1 bg-purple-500/20 text-purple-500 rounded-full text-sm">
-                  Price Spike
-                </span>
-              </div>
-            </div>
-          </motion.div>
+            </motion.div>
+          ))}
         </div>
       </section>
 
       {/* Charts Section */}
       <section className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-        <motion.div
-          whileHover={{ scale: 1.02 }}
-          className="card p-6"
-        >
+        <motion.div whileHover={{ scale: 1.02 }} className="card p-6">
           <h3 className="text-xl font-semibold mb-4 text-white">Harmony Score Trend</h3>
           <ResponsiveContainer width="100%" height={300}>
-            <LineChart data={harmonyScoreData}>
+            <LineChart data={harmonyTrend}>
               <CartesianGrid strokeDasharray="3 3" stroke="#333" />
               <XAxis dataKey="day" stroke="#666" />
               <YAxis stroke="#666" />
-              <Tooltip
-                contentStyle={{ backgroundColor: '#1E1E1E', border: 'none' }}
-                labelStyle={{ color: '#666' }}
-              />
-              <Line
-                type="monotone"
-                dataKey="score"
-                stroke="#00fff5"
-                strokeWidth={2}
-                dot={{ fill: '#00fff5' }}
-              />
+              <Tooltip contentStyle={{ backgroundColor: '#1E1E1E', border: 'none' }} labelStyle={{ color: '#666' }} />
+              <Line type="monotone" dataKey="score" stroke="#00fff5" strokeWidth={2} dot={{ fill: '#00fff5' }} />
             </LineChart>
           </ResponsiveContainer>
         </motion.div>
-
-        <motion.div
-          whileHover={{ scale: 1.02 }}
-          className="card p-6"
-        >
+        <motion.div whileHover={{ scale: 1.02 }} className="card p-6">
           <h3 className="text-xl font-semibold mb-4 text-white">Regional Price Comparison</h3>
           <ResponsiveContainer width="100%" height={300}>
-            <BarChart data={regionalPriceData}>
+            <BarChart data={regionalPrices}>
               <CartesianGrid strokeDasharray="3 3" stroke="#333" />
               <XAxis dataKey="city" stroke="#666" />
               <YAxis stroke="#666" />
-              <Tooltip
-                contentStyle={{ backgroundColor: '#1E1E1E', border: 'none' }}
-                labelStyle={{ color: '#666' }}
-              />
+              <Tooltip contentStyle={{ backgroundColor: '#1E1E1E', border: 'none' }} labelStyle={{ color: '#666' }} />
               <Bar dataKey="price" fill="#00fff5" />
             </BarChart>
           </ResponsiveContainer>
@@ -233,54 +175,20 @@ const MarketHarmonyDashboard = () => {
       <section className="mb-8">
         <h2 className="text-2xl font-bold mb-4 text-white">AI Insights</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <motion.div
-            whileHover={{ scale: 1.02 }}
-            className="card p-6"
-          >
-            <div className="flex items-start gap-4">
-              <Brain className="text-neon-cyan" />
-              <div>
-                <h3 className="font-semibold text-white">Price Imbalance Detected</h3>
-                <p className="text-gray-400 mt-1">
-                  2 sellers control 70% of Samsung S25 Ultra inventory.
-                </p>
+          {(data.aiInsights || []).map((insight, i) => (
+            <motion.div key={i} whileHover={{ scale: 1.02 }} className="card p-6">
+              <div className="flex items-start gap-4">
+                {insight.type === 'Imbalance' && <Brain className="text-neon-cyan" />}
+                {insight.type === 'Recommendation' && <AlertCircle className="text-yellow-500" />}
+                <div>
+                  <h3 className="font-semibold text-white">{insight.type}</h3>
+                  <p className="text-gray-400 mt-1">{insight.message}</p>
+                </div>
               </div>
-            </div>
-          </motion.div>
-
-          <motion.div
-            whileHover={{ scale: 1.02 }}
-            className="card p-6"
-          >
-            <div className="flex items-start gap-4">
-              <TrendingUp className="text-green-500" />
-              <div>
-                <h3 className="font-semibold text-white">Market Movement</h3>
-                <p className="text-gray-400 mt-1">
-                  Seller competition up 10% this week, stabilizing price trends.
-                </p>
-              </div>
-            </div>
-          </motion.div>
-
-          <motion.div
-            whileHover={{ scale: 1.02 }}
-            className="card p-6"
-          >
-            <div className="flex items-start gap-4">
-              <AlertCircle className="text-yellow-500" />
-              <div>
-                <h3 className="font-semibold text-white">AI Recommendation</h3>
-                <p className="text-gray-400 mt-1">
-                  Monitor Amazon listings; supply signals indicate potential shortage in next 48h.
-                </p>
-              </div>
-            </div>
-          </motion.div>
+            </motion.div>
+          ))}
         </div>
       </section>
     </div>
   );
-};
-
-export default MarketHarmonyDashboard;
+}
