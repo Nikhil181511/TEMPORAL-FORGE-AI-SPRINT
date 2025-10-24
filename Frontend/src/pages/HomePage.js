@@ -20,6 +20,26 @@ export default function HomePage() {
   const filterCategory = categoryMap[selectedCategory.toLowerCase()] || "Phones";
   const filteredProducts = products.filter(p => p.category === filterCategory);
 
+  // Category-specific stats
+  const statsByCategory = {
+    Phones: {
+      avgPrice: "₹78,128",
+      sellers: "1,120",
+      harmony: 64
+    },
+    Laptops: {
+      avgPrice: "₹1,87,999",
+      sellers: "154",
+      harmony: 79
+    },
+    Housing: {
+      avgPrice: "₹2,94,50,000",
+      sellers: "28",
+      harmony: 68
+    }
+  };
+  const stats = statsByCategory[filterCategory] || statsByCategory.Phones;
+
   return (
     <div className="mp-app">
       <Header />
@@ -30,9 +50,9 @@ export default function HomePage() {
             Real-time {filterCategory} market insights and pricing harmony metrics
           </p>
           <div className="stats-grid">
-            <StatCard title="Average Price" value={convertUSDToINR(947)} change="+8.3%" hint="Price trend" />
-            <StatCard title="Number of Sellers" value="2,347" change="-12.4%" hint="Seller count trend" />
-            <StatCard title="Harmony Score" value="64" hint="Moderate Balance" accent="highlight" />
+            <StatCard title="Average Price" value={stats.avgPrice} change="+8.3%" hint="Price trend" />
+            <StatCard title="Number of Sellers" value={stats.sellers} change="-12.4%" hint="Seller count trend" />
+            <StatCard title="Harmony Score" value={stats.harmony} hint="Moderate Balance" accent="highlight" />
           </div>
         </section>
 
